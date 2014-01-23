@@ -1,0 +1,18 @@
+DEBUG [2014-01-23 03:16:02,085] Checking resource DomainController
+DEBUG [2014-01-23 03:16:02,085] Method: GET
+DEBUG [2014-01-23 03:16:02,085] Path: /v1/
+DEBUG [2014-01-23 03:16:02,085] Data: 
+DEBUG [2014-01-23 03:16:02,085] Headers: {}
+DEBUG [2014-01-23 03:16:02,085] Host: 10.7.1.113:8000
+DEBUG [2014-01-23 03:16:02,085] establishing HTTP connection: kwargs={}
+DEBUG [2014-01-23 03:16:02,085] Token: None
+DEBUG [2014-01-23 03:16:02,085] using _calc_signature_2
+DEBUG [2014-01-23 03:16:02,085] query string: AWSAccessKeyId=666f20e9a72d4521b954d1daf3cfc05e&Action=DescribeStackResource&ContentType=JSON&LogicalResourceId=DomainController&SignatureMethod=HmacSHA256&SignatureVersion=2&StackName=d498ef2e-b2a3-4807-827e-cd7656971b03&Timestamp=2014-01-23T03%3A16%3A02Z&Version=2010-05-15
+DEBUG [2014-01-23 03:16:02,085] string_to_sign: GET
+10.7.1.113:8000
+/v1/
+AWSAccessKeyId=666f20e9a72d4521b954d1daf3cfc05e&Action=DescribeStackResource&ContentType=JSON&LogicalResourceId=DomainController&SignatureMethod=HmacSHA256&SignatureVersion=2&StackName=d498ef2e-b2a3-4807-827e-cd7656971b03&Timestamp=2014-01-23T03%3A16%3A02Z&Version=2010-05-15
+DEBUG [2014-01-23 03:16:02,085] len(b64)=44
+DEBUG [2014-01-23 03:16:02,085] base64 encoded digest: ceLB8k+LJLnjvs1yaPdJO0QunLkUDUuAM5j3lqWE1F4=
+DEBUG [2014-01-23 03:16:02,085] query_string: AWSAccessKeyId=666f20e9a72d4521b954d1daf3cfc05e&Action=DescribeStackResource&ContentType=JSON&LogicalResourceId=DomainController&SignatureMethod=HmacSHA256&SignatureVersion=2&StackName=d498ef2e-b2a3-4807-827e-cd7656971b03&Timestamp=2014-01-23T03%3A16%3A02Z&Version=2010-05-15 Signature: ceLB8k+LJLnjvs1yaPdJO0QunLkUDUuAM5j3lqWE1F4=
+DEBUG [2014-01-23 03:16:02,289] Metadata does not contain a AWS::CloudFormation::Init section

@@ -1,0 +1,8 @@
+[Boto]
+debug = 0
+is_secure = 0
+https_validate_certificates = 1
+cfn_region_name = heat
+cfn_region_endpoint = 10.7.1.113
+cloudwatch_region_name = heat
+cloudwatch_region_endpoint = 10.7.1.113
