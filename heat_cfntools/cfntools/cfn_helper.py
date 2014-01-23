@@ -21,13 +21,13 @@ Not implemented yet:
 import atexit
 import ConfigParser
 import errno
-import grp
+#import grp
 import hashlib
 import json
 import logging
 import os
 import os.path
-import pwd
+#import pwd
 try:
     import rpmUtils.miscutils as rpmutils
     import rpmUtils.updates as rpmupdates
@@ -41,7 +41,8 @@ import tempfile
 
 # Override BOTO_CONFIG, which makes boto look only at the specified
 # config file, instead of the default locations
-os.environ['BOTO_CONFIG'] = '/var/lib/heat-cfntools/cfn-boto-cfg'
+#os.environ['BOTO_CONFIG'] = '/var/lib/heat-cfntools/cfn-boto-cfg'
+os.environ['BOTO_CONFIG'] = 'C:\\var\\cfn\\cfn-boto-cfg'
 from boto import cloudformation
 
 
@@ -529,15 +530,17 @@ class FilesHandler(object):
             gid = -1
             if 'owner' in meta:
                 try:
-                    user_info = pwd.getpwnam(meta['owner'])
-                    uid = user_info[2]
+                    pass
+                    #user_info = pwd.getpwnam(meta['owner'])
+                    #uid = user_info[2]
                 except KeyError:
                     pass
 
             if 'group' in meta:
                 try:
-                    group_info = grp.getgrnam(meta['group'])
-                    gid = group_info[2]
+                    pass
+                    #group_info = grp.getgrnam(meta['group'])
+                    #gid = group_info[2]
                 except KeyError:
                     pass
 
@@ -1088,8 +1091,8 @@ class Metadata(object):
     def retrieve(
             self,
             meta_str=None,
-            default_path='/var/lib/heat-cfntools/cfn-init-data',
-            last_path='/var/cache/heat-cfntools/last_metadata'):
+            default_path='C:\\var\\cfn\\cfn-init-data',
+            last_path='C:\\var\\cfn\\last_metadata'):
         """Read the metadata from the given filename or from the remote server.
 
            Returns:
@@ -1168,6 +1171,8 @@ class Metadata(object):
                                          delete=False) as cf:
             os.chmod(cf.name, 0o600)
             cf.write(json.dumps(self._metadata))
+            cf.close()
+            os.remove(last_path)
             os.rename(cf.name, last_path)
 
         return True

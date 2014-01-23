@@ -29,7 +29,7 @@ parser.add_argument('-c', '--config',
                     dest="config_dir",
                     help="Hook Config Directory",
                     required=False,
-                    default='/etc/cfn/hooks.d')
+                    default='C:\\var\cfn\hooks.d')
 parser.add_argument('-f', '--no-daemon',
                     dest="no_deamon",
                     action="store_true",
@@ -59,7 +59,9 @@ else:
 
 LOG = logging.getLogger('cfntools')
 
-main_conf_path = '/etc/cfn/cfn-hup.conf'
+
+#main_conf_path = '/etc/cfn/cfn-hup.conf'
+main_conf_path = 'C:\\var\cfn\cfn-hup.conf'
 try:
     main_config_file = open(main_conf_path)
 except IOError as exc:
@@ -67,7 +69,8 @@ except IOError as exc:
     exit(1)
 
 config_files = []
-hooks_conf_path = '/etc/cfn/hooks.conf'
+#hooks_conf_path = '/etc/cfn/hooks.conf'
+hooks_conf_path = 'C:\\var\\cfn\\hooks.conf'
 if os.path.exists(hooks_conf_path):
     try:
         config_files.append(open(hooks_conf_path))
