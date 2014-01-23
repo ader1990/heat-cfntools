@@ -74,58 +74,6 @@ class TestCommandRunner(MockPopenTestCase):
         self.m.VerifyAll()
 
 
-class TestPackages(MockPopenTestCase):
-
-    def test_rpm_install(self):
-        install_list = []
-        for pack in ('httpd', 'wordpress', 'mysql-server'):
-            self.mock_cmd_run(['su', 'root', '-c',
-                               'rpm -q %s' % pack]).AndReturn(
-                                   FakePOpen(returncode=1))
-            self.mock_cmd_run(
-                ['su', 'root', '-c',
-                 'yum -y --showduplicates list available %s' % pack]) \
-                .AndReturn(FakePOpen(returncode=0))
-            install_list.append(pack)
-
-        self.mock_cmd_run(
-            ['su', 'root', '-c',
-             'yum -y install %s' % ' '.join(install_list)]) \
-            .AndReturn(FakePOpen(returncode=0))
-
-        self.m.ReplayAll()
-        packages = {
-            "yum": {
-                "mysql-server": [],
-                "httpd": [],
-                "wordpress": []
-            }
-        }
-
-        cfn_helper.PackagesHandler(packages).apply_packages()
-        self.m.VerifyAll()
-
-    def test_apt_install(self):
-        install_list = 'httpd wordpress mysql-server'
-        cmd = 'DEBIAN_FRONTEND=noninteractive apt-get -y install'
-
-        self.mock_cmd_run(['su', 'root', '-c',
-                           '%s %s' % (cmd, install_list)]).AndReturn(
-                               FakePOpen(returncode=0))
-        self.m.ReplayAll()
-
-        packages = {
-            "apt": {
-                "mysql-server": [],
-                "httpd": [],
-                "wordpress": []
-            }
-        }
-
-        cfn_helper.PackagesHandler(packages).apply_packages()
-        self.m.VerifyAll()
-
-
 class TestServicesHandler(MockPopenTestCase):
 
     def test_services_handler_systemd(self):
@@ -497,7 +445,7 @@ class TestCfnHelper(testtools.TestCase):
             metadata_info.write(content)
             metadata_info.flush()
             port = cfn_helper.metadata_server_port(metadata_info.name)
-            self.assertEqual(value, port)
+            self.assertEquals(value, port)
 
     def test_metadata_server_port(self):
         self._check_metadata_content("http://172.20.42.42:8000\n", 8000)
@@ -521,8 +469,8 @@ class TestCfnHelper(testtools.TestCase):
 
     def test_metadata_server_nofile(self):
         random_filename = self.getUniqueString()
-        self.assertEqual(None,
-                         cfn_helper.metadata_server_port(random_filename))
+        self.assertEquals(None,
+                          cfn_helper.metadata_server_port(random_filename))
 
     def test_to_boolean(self):
         self.assertTrue(cfn_helper.to_boolean(True))
